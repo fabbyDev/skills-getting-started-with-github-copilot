@@ -39,6 +39,43 @@ activities = {
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
     }
+    ,
+    "Basketball Club": {
+        "description": "Team basketball practice and friendly matches",
+        "schedule": "Mondays and Wednesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 15,
+        "participants": ["james@mergington.edu"]
+    },
+    "Tennis Team": {
+        "description": "Tennis training and intramural competitions",
+        "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 10,
+        "participants": ["alex@mergington.edu"]
+    },
+    "Art Club": {
+        "description": "Painting, drawing, and sculpture workshops",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 15,
+        "participants": ["isabella@mergington.edu", "lucas@mergington.edu"]
+    },
+    "Drama Club": {
+        "description": "Theater productions and acting performances",
+        "schedule": "Thursdays, 3:30 PM - 5:30 PM",
+        "max_participants": 20,
+        "participants": ["sophia@mergington.edu"]
+    },
+    "Debate Team": {
+        "description": "Competitive debate and public speaking skills",
+        "schedule": "Mondays and Fridays, 3:30 PM - 4:30 PM",
+        "max_participants": 12,
+        "participants": ["marcus@mergington.edu"]
+    },
+    "Science Club": {
+        "description": "Hands-on experiments and scientific research projects",
+        "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 18,
+        "participants": ["avery@mergington.edu", "jordan@mergington.edu"]
+    }
 }
 
 
@@ -63,5 +100,9 @@ def signup_for_activity(activity_name: str, email: str):
     activity = activities[activity_name]
 
     # Add student
+    #validate stidents is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
+    
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
